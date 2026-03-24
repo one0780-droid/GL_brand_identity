@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GL — Brand Identity</title>
+
+<style>
+  :root {
+    --bg: #faf7f2;
+    --bg2: #f0ebe0;
+    --surface: #ffffff;
+    --border: #e8e0d0;
+    --sun: #e8a020;
+    --sun2: #f5c842;
+    --sun3: #fde68a;
+    --earth: #3d6b35;
+    --earth2: #6b9e60;
+    --deep: #1a3d1a;
+    --text: #1c1a14;
+    --text-mid: #5a5040;
+    --text-dim: #9a8e78;
+    --bio: #3d6b35;
+    --magic: #8b4a0a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── 히어로 섹션 ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: #0d3a0d;
+    padding: 80px 32px;
+  }
+
+  /* 전체 배경을 뜨겁게 */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%,
+      #3a8a3a 0%,
+      #2a6e2a 25%,
+      #1a4e1a 50%,
+      #0d2e0d 75%,
+      #071807 100%
+    );
+    opacity: 1;
+    animation: bgFlicker 2s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes bgFlicker {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  /* 태양 본체 */
+  .sun-core {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+      #ffffff 0%,
+      #fffbe0 15%,
+      #ffe066 35%,
+      #ffaa00 55%,
+      #ff6600 75%,
+      #cc2200 90%,
+      #660000 100%
+    );
+    box-shadow:
+      0 0 0 8px rgba(255,220,80,0.5),
+      0 0 30px 15px rgba(255,200,0,1),
+      0 0 80px 40px rgba(255,140,0,0.95),
+      0 0 160px 80px rgba(255,80,0,0.8),
+      0 0 300px 150px rgba(220,40,0,0.6),
+      0 0 500px 250px rgba(180,20,0,0.35),
+      0 0 800px 400px rgba(120,10,0,0.15);
+    animation: corePulse 2s ease-in-out infinite;
+    z-index: 5;
+  }
+
+  @keyframes corePulse {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+      box-shadow:
+        0 0 0 8px rgba(255,220,80,0.5),
+        0 0 30px 15px rgba(255,200,0,1),
+        0 0 80px 40px rgba(255,140,0,0.95),
+        0 0 160px 80px rgba(255,80,0,0.8),
+        0 0 300px 150px rgba(220,40,0,0.6),
+        0 0 500px 250px rgba(180,20,0,0.35),
+        0 0 800px 400px rgba(120,10,0,0.15);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.08);
+      box-shadow:
+        0 0 0 12px rgba(255,240,100,0.7),
+        0 0 50px 25px rgba(255,220,50,1),
+        0 0 120px 60px rgba(255,200,0,1),
+        0 0 240px 120px rgba(255,100,0,0.9),
+        0 0 420px 210px rgba(230,50,0,0.7),
+        0 0 650px 325px rgba(190,20,0,0.45),
+        0 0 1000px 500px rgba(140,10,0,0.2);
+    }
+  }
+
+  /* 코로나 — 태양 표면 불꽃 */
+  .sun-corona {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255,200,0,0.6) 0%, transparent 40%),
+      radial-gradient(circle at 70% 80%, rgba(255,150,0,0.5) 0%, transparent 35%),
+      radial-gradient(circle at 80% 30%, rgba(255,100,0,0.4) 0%, transparent 30%),
+      radial-gradient(circle at 20% 70%, rgba(255,120,0,0.45) 0%, transparent 35%);
+    animation: coronaSpin 8s linear infinite;
+    z-index: 4;
+    mix-blend-mode: screen;
+  }
+
+  @keyframes coronaSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* 광선 캔버스 */
+  .sun-rays-wrap {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px; height: 900px;
+    animation: raysRotate 25s linear infinite;
+    z-index: 2;
+  }
+
+  .ray {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 3px;
+    transform-origin: 0 0;
+    border-radius: 2px;
+  }
+
+  /* 12개 광선 */
+  .ray:nth-child(1)  { height: 420px; margin-top: -420px; margin-left: -1.5px; transform: rotate(0deg);   background: linear-gradient(to top, transparent, rgba(255,200,0,0.7) 60%, rgba(255,240,100,0.9)); }
+  .ray:nth-child(2)  { height: 380px; margin-top: -380px; margin-left: -1.5px; transform: rotate(30deg);  background: linear-gradient(to top, transparent, rgba(255,170,0,0.5) 60%, rgba(255,220,80,0.7)); }
+  .ray:nth-child(3)  { height: 440px; margin-top: -440px; margin-left: -1.5px; transform: rotate(60deg);  background: linear-gradient(to top, transparent, rgba(255,190,0,0.65) 60%, rgba(255,230,90,0.85)); }
+  .ray:nth-child(4)  { height: 360px; margin-top: -360px; margin-left: -1.5px; transform: rotate(90deg);  background: linear-gradient(to top, transparent, rgba(255,160,0,0.5) 60%, rgba(255,210,70,0.7)); }
+  .ray:nth-child(5)  { height: 410px; margin-top: -410px; margin-left: -1.5px; transform: rotate(120deg); background: linear-gradient(to top, transparent, rgba(255,180,0,0.6) 60%, rgba(255,225,85,0.8)); }
+  .ray:nth-child(6)  { height: 390px; margin-top: -390px; margin-left: -1.5px; transform: rotate(150deg); background: linear-gradient(to top, transparent, rgba(255,155,0,0.45) 60%, rgba(255,205,65,0.65)); }
+  .ray:nth-child(7)  { height: 430px; margin-top: -430px; margin-left: -1.5px; transform: rotate(180deg); background: linear-gradient(to top, transparent, rgba(255,200,0,0.7) 60%, rgba(255,240,100,0.9)); }
+  .ray:nth-child(8)  { height: 370px; margin-top: -370px; margin-left: -1.5px; transform: rotate(210deg); background: linear-gradient(to top, transparent, rgba(255,170,0,0.5) 60%, rgba(255,215,75,0.7)); }
+  .ray:nth-child(9)  { height: 450px; margin-top: -450px; margin-left: -1.5px; transform: rotate(240deg); background: linear-gradient(to top, transparent, rgba(255,185,0,0.6) 60%, rgba(255,228,88,0.82)); }
+  .ray:nth-child(10) { height: 400px; margin-top: -400px; margin-left: -1.5px; transform: rotate(270deg); background: linear-gradient(to top, transparent, rgba(255,165,0,0.55) 60%, rgba(255,212,72,0.75)); }
+  .ray:nth-child(11) { height: 420px; margin-top: -420px; margin-left: -1.5px; transform: rotate(300deg); background: linear-gradient(to top, transparent, rgba(255,178,0,0.58) 60%, rgba(255,222,82,0.78)); }
+  .ray:nth-child(12) { height: 385px; margin-top: -385px; margin-left: -1.5px; transform: rotate(330deg); background: linear-gradient(to top, transparent, rgba(255,152,0,0.44) 60%, rgba(255,202,62,0.64)); }
+
+  @keyframes raysRotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* 열기 파동 */
+  .heat-wave {
+    position: absolute;
+    top: 50%; left: 50%;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 160, 0, 0.6);
+    animation: heatExpand 2.5s ease-out infinite;
+    z-index: 3;
+  }
+
+  .heat-wave:nth-child(1) { width: 220px; height: 220px; animation-delay: 0s;    border-color: rgba(255,200,50,0.8); }
+  .heat-wave:nth-child(2) { width: 220px; height: 220px; animation-delay: 0.6s;  border-color: rgba(255,180,0,0.6); }
+  .heat-wave:nth-child(3) { width: 220px; height: 220px; animation-delay: 1.2s;  border-color: rgba(255,120,0,0.45); }
+  .heat-wave:nth-child(4) { width: 220px; height: 220px; animation-delay: 1.8s;  border-color: rgba(255,80,0,0.3); }
+
+  @keyframes heatExpand {
+    0%   { transform: translate(-50%,-50%) scale(1);    opacity: 0.9; }
+    100% { transform: translate(-50%,-50%) scale(5);    opacity: 0; }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: #0a2a0a;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.3s;
+    text-shadow: 0 1px 3px rgba(255,200,100,0.3);
+  }
+
+  .hero-logo {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 140px;
+    font-weight: 900;
+    color: #0a1f0a;
+    line-height: 1;
+    letter-spacing: 16px;
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.5s;
+    text-shadow: 0 2px 8px rgba(255,180,0,0.2);
+  }
+
+  .hero-logo span {
+    color: #1a4a1a;
+  }
+
+  .hero-tagline-kr {
+    font-size: 18px;
+    font-weight: 500;
+    color: #0a2a0a;
+    letter-spacing: 4px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.7s;
+  }
+
+  .hero-philosophy {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 22px;
+    
+    color: #0a1e0a;
+    max-width: 600px;
+    line-height: 1.8;
+    margin: 0 auto 48px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.9s;
+  }
+
+  em, i, .slogan-en {
+    font-style: normal !important;
+  }
+
+  .hero-philosophy em {
+    color: #1a5c1a;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .hero-slogan {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #0a2a0a;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.1s;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── 순환 다이어그램 섹션 ── */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .section {
+    padding: 80px 0;
+  }
+
+  .section-label {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--sun);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-heading {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  .section-desc {
+    font-size: 15px;
+    color: var(--text-mid);
+    max-width: 560px;
+    line-height: 1.9;
+    font-weight: 300;
+  }
+
+  /* ── 핵심 철학 ── */
+  .philosophy-section {
+    background: var(--deep);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .philosophy-section::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,160,32,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .phil-card {
+    padding: 48px 36px;
+    background: rgba(255,255,255,0.02);
+    border-right: 1px solid rgba(255,255,255,0.04);
+    text-align: center;
+    transition: background 0.3s;
+  }
+
+  .phil-card:last-child { border-right: none; }
+  .phil-card:hover { background: rgba(232,160,32,0.04); }
+
+  .phil-symbol {
+    font-size: 40px;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .phil-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 20px;
+    color: var(--sun2);
+    margin-bottom: 12px;
+  }
+
+  .phil-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.8;
+  }
+
+  /* ── 순환 플로우 ── */
+  .cycle-section {
+    padding: 80px 0;
+    background: var(--bg);
+  }
+
+  .cycle-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin-top: 48px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 16px;
+    overflow: hidden;
+  }
+
+  .cycle-node {
+    text-align: center;
+    padding: 40px 24px;
+    width: 100%;
+    position: relative;
+  }
+
+  .cycle-node:not(:last-child) {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cycle-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+    display: block;
+    line-height: 1;
+  }
+
+  .cycle-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+
+  .cycle-desc {
+    font-size: 16px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .cycle-arrow {
+    font-size: 36px;
+    color: var(--sun);
+    text-align: center;
+    padding: 8px 0;
+    display: block;
+    animation: arrowBounce 1.5s ease-in-out infinite;
+  }
+
+  @keyframes arrowBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  /* ── 두 제품 철학 ── */
+  .products-philosophy {
+    padding: 100px 0;
+    background: var(--bg2);
+  }
+
+  .product-phil-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .product-phil-card {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .product-phil-header {
+    padding: 48px 40px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bio-header {
+    background: linear-gradient(135deg, #0d2610, #1a4a14);
+  }
+
+  .magic-header {
+    background: linear-gradient(135deg, #1a0d02, #3d1a04);
+  }
+
+  .product-phil-header::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    opacity: 0.15;
+  }
+
+  .bio-header::before {
+    background: radial-gradient(circle, #6b9e60, transparent);
+  }
+
+  .magic-header::before {
+    background: radial-gradient(circle, #f5c842, transparent);
+  }
+
+  .product-phil-tag {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+    opacity: 0.6;
+  }
+
+  .bio-header .product-phil-tag { color: var(--earth2); }
+  .magic-header .product-phil-tag { color: var(--sun2); }
+
+  .product-phil-name {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 52px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .bio-header .product-phil-name { color: #e8f5e6; }
+  .magic-header .product-phil-name { color: #fef3c7; }
+
+  .product-phil-copy {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.8;
+    opacity: 0.7;
+    color: white;
+  }
+
+  .product-phil-body {
+    padding: 32px 40px;
+    background: var(--surface);
+  }
+
+  .cycle-story {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .cycle-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 13px;
+  }
+
+  .cycle-step-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .bio-num { background: rgba(61,107,53,0.1); color: var(--bio); }
+  .magic-num { background: rgba(139,74,10,0.1); color: var(--magic); }
+
+  .cycle-step-text { color: var(--text-mid); line-height: 1.6; }
+  .cycle-step-text strong { color: var(--text); }
+
+  .product-phil-result {
+    padding: 16px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+
+  .bio-result {
+    background: rgba(61,107,53,0.06);
+    border: 1px solid rgba(61,107,53,0.15);
+    color: var(--bio);
+  }
+
+  .magic-result {
+    background: rgba(139,74,10,0.06);
+    border: 1px solid rgba(139,74,10,0.15);
+    color: var(--magic);
+  }
+
+  /* ── ESG + 탄소 크레딧 ── */
+  .esg-section {
+    padding: 100px 0;
+    background: var(--deep);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .esg-section::after {
+    content: '';
+    position: absolute;
+    bottom: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(61,107,53,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .esg-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+  }
+
+  .esg-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 32px 28px;
+    transition: border-color 0.3s;
+  }
+
+  .esg-card:hover { border-color: rgba(232,160,32,0.2); }
+
+  .esg-letter {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--sun2);
+    line-height: 1;
+    margin-bottom: 12px;
+    opacity: 0.8;
+  }
+
+  .esg-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 12px;
+  }
+
+  .esg-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .esg-points li {
+    font-size: 12px;
+    color: rgba(255,255,255,0.88);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .esg-points li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--sun);
+    opacity: 1;
+  }
+
+  .carbon-box {
+    margin-top: 24px;
+    background: linear-gradient(135deg, rgba(232,160,32,0.06), rgba(61,107,53,0.06));
+    border: 1px solid rgba(232,160,32,0.15);
+    border-radius: 12px;
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .carbon-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 24px;
+    color: var(--sun2);
+    margin-bottom: 12px;
+  }
+
+  .carbon-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.8;
+  }
+
+  .carbon-models {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .carbon-model {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .carbon-tag {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+
+  .bio-tag-c { background: rgba(80,160,80,0.25); color: #90e890; }
+  .magic-tag-c { background: rgba(100,200,100,0.2); color: #b0f0b0; }
+
+  .carbon-model-text {
+    font-size: 12px;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.6;
+  }
+
+  /* ── 브랜드 선언 ── */
+  .declaration {
+    padding: 120px 0;
+    background: var(--bg);
+    text-align: center;
+  }
+
+  .declaration-quote {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 42px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.5;
+    max-width: 760px;
+    margin: 0 auto 32px;
+  }
+
+  .declaration-quote em {
+    color: var(--sun);
+    
+  }
+
+  .declaration-quote span {
+    color: var(--bio);
+  }
+
+  .declaration-sub {
+    font-size: 15px;
+    color: var(--text-dim);
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+
+  /* ── 슬로건 섹션 ── */
+  .slogan-section {
+    background: var(--deep);
+    padding: 80px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slogan-section::before {
+    content: 'GL';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 400px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.02);
+    letter-spacing: 40px;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .slogan-kr {
+    font-family: -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 8px;
+    margin-bottom: 16px;
+  }
+
+  .slogan-kr strong {
+    color: var(--sun2);
+    font-weight: 700;
+  }
+
+  .slogan-en {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 18px;
+    
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 3px;
+    margin-bottom: 48px;
+  }
+
+  .slogan-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--sun);
+    margin: 0 auto 48px;
+    opacity: 0.4;
+  }
+
+  .brand-bottom {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 80px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.08);
+    letter-spacing: 20px;
+  }
+
+  /* ── 푸터 ── */
+  .footer {
+    background: var(--bg2);
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-brand {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 8px;
+    color: var(--text);
+  }
+
+  .footer-brand span { color: var(--sun); }
+
+  .footer-info {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 700px) {
+    .hero-logo { font-size: 80px; }
+    .hero-philosophy { font-size: 18px; }
+    .philosophy-grid { grid-template-columns: 1fr; }
+    .cycle-visual { grid-template-columns: 1fr; }
+    .cycle-arrow { transform: rotate(90deg); }
+    .product-phil-grid { grid-template-columns: 1fr; }
+    .esg-grid { grid-template-columns: 1fr; }
+    .carbon-box { grid-template-columns: 1fr; }
+    .declaration-quote { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- 히어로 -->
+  <section class="hero">
+    <div class="sun-rays-wrap">
+      <div class="ray"></div>
+      <div class="ray"></div>
+      <div class="ray"></div>
+      <div class="ray"></div>
+      <div class="ray"></div>
+      <div class="ray"></div>
+      <div class="ray"></div>
+      <div class="ray"></div>
+      <div class="ray"></div>
+      <div class="ray"></div>
+      <div class="ray"></div>
+      <div class="ray"></div>
+    </div>
+    <div class="heat-wave"></div>
+    <div class="heat-wave"></div>
+    <div class="heat-wave"></div>
+    <div class="heat-wave"></div>
+    <div class="sun-corona"></div>
+    <div class="sun-core"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">Good Living · Brand Identity 2026</div>
+      <div class="hero-logo">G<span>L</span></div>
+      <div class="hero-tagline-kr">굿 리빙 · 좋은 삶을 위한 기술</div>
+      <div class="hero-philosophy">
+        버려지는 자원과 <em>태양</em>, 그리고 <em><strong style="font-weight:900;">GL</strong></em>이 만나는 순간
+      </div>
+      <div class="hero-slogan">Where Food Meets the Sun · Everything Returns to Earth</div>
+    </div>
+  </section>
+
+  <!-- 핵심 철학 -->
+  <section class="philosophy-section">
+    <div class="container">
+      <div style="text-align:center; margin-bottom: 56px;">
+        <div class="section-label" style="color: var(--sun);">BRAND PHILOSOPHY</div>
+        <div class="section-heading" style="color: white; margin-bottom: 0; line-height: 1.4;">태양이 지구를<br>순환시키듯</div>
+        <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 18px; color: rgba(255,255,255,0.4); margin-top: 8px; ">GL이 우리 삶을 순환시킨다</div>
+      </div>
+      <div class="philosophy-grid">
+        <div class="phil-card">
+          <span class="phil-symbol">☀️</span>
+          <div class="phil-title">태양의 원리</div>
+          <div class="phil-desc">태양은 거대한 플라즈마 덩어리.<br>모든 생명을 순환시키는 우주의 근원 에너지.<br>GL은 그 원리를 주방으로 가져옵니다.</div>
+        </div>
+        <div class="phil-card">
+          <span class="phil-symbol">♻️</span>
+          <div class="phil-title">자원의 순환</div>
+          <div class="phil-desc">버려지는 음식물 폐기물은 끝이 아닙니다.<br>플라즈마와 만나 토양으로, 탄소로, 에너지로 다시 태어납니다.</div>
+        </div>
+        <div class="phil-card">
+          <span class="phil-symbol">🌍</span>
+          <div class="phil-title">지구로의 귀환</div>
+          <div class="phil-desc">모든 자원은 결국 지구로 돌아가야 합니다.<br>GL의 바이오, 매직 두 프로젝트는 각자의 방식으로 이 여정을 완성합니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 순환 플로우 -->
+  <section class="cycle-section">
+    <div class="container">
+      <div class="section-label">THE CYCLE</div>
+      <div class="section-heading" style="line-height: 1.4;">폐기물이<br>자원이 되는 여정</div>
+      <div class="section-desc">ESGL 환경과 탄소, 블록체인의 조화로움<br>GL 앰버서더분들과 함께 누리겠습니다</div>
+
+      <div class="cycle-visual">
+        <div class="cycle-node">
+          <span class="cycle-icon">🗑️</span>
+          <div class="cycle-title">음식물 폐기물<br>발생</div>
+          <div class="cycle-desc">매일 일상 생활속에서 발생하는 음식물 폐기물</div>
+        </div>
+        <div class="cycle-arrow">↓</div>
+        <div class="cycle-node">
+          <span class="cycle-icon">☀️</span>
+          <div class="cycle-title">태양(플라즈마)과 만남</div>
+          <div class="cycle-desc">태양의 원리, GL의 플라즈마가 작동</div>
+        </div>
+        <div class="cycle-arrow">↓</div>
+        <div class="cycle-node">
+          <span class="cycle-icon">⚡</span>
+          <div class="cycle-title">변환</div>
+          <div class="cycle-desc">슈퍼미생물 배양, 분해속도 UP<br>악취 바이러스 분해 연소</div>
+        </div>
+        <div class="cycle-arrow">↓</div>
+        <div class="cycle-node">
+          <span class="cycle-icon">🌱</span>
+          <div class="cycle-title">자원 귀환</div>
+          <div class="cycle-desc">토양·탄소·에너지로 지구에 돌아감</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 두 제품 철학 -->
+  <section class="products-philosophy">
+    <div class="container">
+      <div class="section-label">THREE PATHS · ONE PHILOSOPHY</div>
+      <div class="section-heading">세 가지 길, 하나의 철학</div>
+      <div class="section-desc">GL BIO, GL MAGIC, GL ECOFARM — 세 프로젝트는 각자의 방식으로 같은 목적지에 도달합니다.</div>
+
+      <div class="product-phil-grid">
+
+        <!-- GL BIO -->
+        <div class="product-phil-card">
+          <div class="product-phil-header bio-header">
+            <span class="product-phil-tag">GL · LINE 01 · 주력 모델</span>
+            <div class="product-phil-name">BIO</div>
+            <div class="product-phil-copy">태양이 미생물을 깨우고 냄새를 지운다.<br>자연이 자연으로 돌아가는 가장 완전한 순환.</div>
+          </div>
+          <div class="product-phil-body">
+            <div class="cycle-story">
+              <div class="cycle-step">
+                <div class="cycle-step-num bio-num">1</div>
+                <div class="cycle-step-text"><strong>음식물 폐기물 투입</strong> — 매일 발생하는 음식물 폐기물이 챔버로</div>
+              </div>
+              <div class="cycle-step">
+                <div class="cycle-step-num bio-num">2</div>
+                <div class="cycle-step-text"><strong>저온 플라즈마 조사</strong> — 태양의 원리로 유익균을 깨움 + 악취 분자 동시 분해</div>
+              </div>
+              <div class="cycle-step">
+                <div class="cycle-step-num bio-num">3</div>
+                <div class="cycle-step-text"><strong>미생물 고속 분해 + 무취</strong> — 활성화된 미생물이 기존 24시간 → <strong>12~16시간</strong>으로 단축, 냄새 없이 완료</div>
+              </div>
+              <div class="cycle-step">
+                <div class="cycle-step-num bio-num">4</div>
+                <div class="cycle-step-text"><strong>CO₂ + 수분으로 귀환</strong> — 유익한 자연의 일부로 회생. 잔여물 최소화</div>
+              </div>
+            </div>
+            <div class="product-phil-result bio-result">
+              🌿 미생물 활성화 + 악취 제거 동시 달성 → 매립 메탄 차단 → 탄소 크레딧 발행
+            </div>
+          </div>
+        </div>
+
+        <!-- GL MAGIC -->
+        <div class="product-phil-card">
+          <div class="product-phil-header magic-header">
+            <span class="product-phil-tag">GL · LINE 02 · 강력 속효 모델</span>
+            <div class="product-phil-name">MAGIC</div>
+            <div class="product-phil-copy">태양의 불꽃으로 태운다.<br>분쇄 후 플라즈마 연소로 완전히 처리. 남는 건 한 줌의 바이오차뿐.</div>
+          </div>
+          <div class="product-phil-body">
+            <div class="cycle-story">
+              <div class="cycle-step">
+                <div class="cycle-step-num magic-num">1</div>
+                <div class="cycle-step-text"><strong>분쇄 + 건조</strong> — 음식물 폐기물을 미세 입자로, 수분 90% 제거</div>
+              </div>
+              <div class="cycle-step">
+                <div class="cycle-step-num magic-num">2</div>
+                <div class="cycle-step-text"><strong>고출력 플라즈마 연소</strong> — 태양급 고온으로 유기물 강력 분해, 악취 분자 완전 소멸</div>
+              </div>
+              <div class="cycle-step">
+                <div class="cycle-step-num magic-num">3</div>
+                <div class="cycle-step-text"><strong>완전 무취 달성</strong> — 기존 분쇄건조 방식의 잔여 냄새까지 플라즈마가 완전 제거</div>
+              </div>
+              <div class="cycle-step">
+                <div class="cycle-step-num magic-num">4</div>
+                <div class="cycle-step-text"><strong>바이오차 → 탄소 귀환</strong> — 한 줌의 숯가루만 남아 토양 개량제·탄소 저장으로 활용</div>
+              </div>
+            </div>
+            <div class="product-phil-result magic-result">
+              🔥 강력 연소 분해 + 악취 완전 제거 → 바이오차 탄소 격리 → 탄소 크레딧 발행
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- GL ECOFARM 전체 너비 -->
+      <div style="margin-top: 24px;">
+        <div class="product-phil-card" style="border-radius: 16px; overflow: hidden; border: 1px solid var(--border);">
+          <div class="product-phil-header" style="background: linear-gradient(135deg, #0a2e12, #1a5c1a); padding: 40px;">
+            <span class="product-phil-tag" style="color: rgba(100,220,100,0.6);">GL · LINE 03 · 순환 완성 모델</span>
+            <div class="product-phil-name" style="color: #e8ffe8; font-size: 52px;">ECOFARM</div>
+            <div class="product-phil-copy" style="color: rgba(255,255,255,0.7);">BIO와 MAGIC의 부산물이 완전 무결한 식자재로 다시 태어난다.<br>콜드 플라즈마가 생장을 2배 높이는 베란다 수직 스마트팜. ESGL 순환의 완성.</div>
+          </div>
+          <div class="product-phil-body" style="display: flex; flex-direction: column; gap: 16px;">
+            <div class="cycle-story">
+              <div class="cycle-step">
+                <div class="cycle-step-num" style="background: #2a6e3a; color: white;">1</div>
+                <div class="cycle-step-text"><strong>BIO + MAGIC 부산물 수거</strong> — 흙 형태 퇴비 + 바이오차를 배양액으로 희석</div>
+              </div>
+              <div class="cycle-step">
+                <div class="cycle-step-num" style="background: #2a6e3a; color: white;">2</div>
+                <div class="cycle-step-text"><strong>콜드 플라즈마 활성수(PAW) 생성</strong> — 배양액 + 플라즈마 처리 → 화학비료 불필요</div>
+              </div>
+              <div class="cycle-step">
+                <div class="cycle-step-num" style="background: #2a6e3a; color: white;">3</div>
+                <div class="cycle-step-text"><strong>베란다 수직 타워 에어로포닉스</strong> — W280×D280×H900mm · 12~18포트 · 흙 불필요</div>
+              </div>
+              <div class="cycle-step">
+                <div class="cycle-step-num" style="background: #2a6e3a; color: white;">4</div>
+                <div class="cycle-step-text"><strong>21일 만에 채소 수확</strong> — 상추·허브·새싹 · 식탁으로 귀환 · 순환 완성</div>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+              <div style="background: var(--bg); border-radius: 8px; padding: 16px; text-align: center;">
+                <div style="font-size: 28px; font-weight: 900; color: #2a6e3a;">21일</div>
+                <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">상추 수확 주기</div>
+              </div>
+              <div style="background: var(--bg); border-radius: 8px; padding: 16px; text-align: center;">
+                <div style="font-size: 28px; font-weight: 900; color: #2a6e3a;">2~3배</div>
+                <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">플라즈마 생장 속도</div>
+              </div>
+              <div style="background: var(--bg); border-radius: 8px; padding: 16px; text-align: center;">
+                <div style="font-size: 28px; font-weight: 900; color: #2a6e3a;">0</div>
+                <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">화학비료 사용</div>
+              </div>
+              <div style="background: var(--bg); border-radius: 8px; padding: 16px; text-align: center;">
+                <div style="font-size: 28px; font-weight: 900; color: #2a6e3a;">100%</div>
+                <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">부산물 활용</div>
+              </div>
+            </div>
+            <div style="background: rgba(42,110,58,0.08); border: 1px solid rgba(42,110,58,0.2); border-radius: 8px; padding: 16px 20px; font-size: 14px; color: #2a6e3a; font-weight: 600; line-height: 1.8; text-align: center;">
+              🌱 부산물 배양액 활용 → 채소 수확 → 다시 식탁으로<br>
+              음식물 폐기물이 채소가 되는 완전한 ESGL 순환
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESG -->
+  <section class="esg-section">
+    <div class="container">
+      <div class="section-label" style="color: var(--sun);">ESG FRAMEWORK</div>
+      <div class="section-heading" style="color: white;">GL의 ESG 철학</div>
+      <div class="section-desc" style="color: rgba(255,255,255,0.45);">GL의 모든 제품은 환경·사회·거버넌스 세 축을 동시에 만족합니다.</div>
+
+      <div class="esg-grid">
+        <div class="esg-card">
+          <div class="esg-letter">E</div>
+          <div class="esg-title">Environment 환경</div>
+          <ul class="esg-points">
+            <li>매립 메탄 배출 완전 차단</li>
+            <li>화학약품 제로 처리</li>
+            <li>바이오차 탄소 격리</li>
+            <li>초저전력 또는 친환경 에너지</li>
+            <li>탄소 크레딧 발행 연계</li>
+          </ul>
+        </div>
+        <div class="esg-card">
+          <div class="esg-letter">S</div>
+          <div class="esg-title">Social 사회</div>
+          <ul class="esg-points">
+            <li>생활 악취 완전 제거</li>
+            <li>위생적 주방 환경 조성</li>
+            <li>분리수거 부담 제로</li>
+            <li>음식물 폐기물 처리 스트레스 해방</li>
+            <li>친환경 생활습관 형성</li>
+          </ul>
+        </div>
+        <div class="esg-card">
+          <div class="esg-letter">G</div>
+          <div class="esg-title">Governance 거버넌스</div>
+          <ul class="esg-points">
+            <li>세계 최초 원천 특허 보유</li>
+            <li>탄소 크레딧 투명한 발행</li>
+            <li>환경부 인증 기반 신뢰</li>
+            <li>ESG 투자자 유치 가능</li>
+            <li>글로벌 환경 규제 선제 대응</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="carbon-box">
+        <div>
+          <div class="carbon-title">탄소 × 블록체인</div>
+          <div class="carbon-desc">
+            GL의 친환경 디바이스들은 GL만의 방식으로<br>
+            탄소 저감 데이터를 축적합니다.<br><br>
+            <strong style="color: var(--sun2);">탄소문제를 해결하고 환경을 살리는 블록체인,<br>
+            GL이 먼저 시작합니다.</strong>
+          </div>
+        </div>
+        <div class="carbon-models">
+          <div class="carbon-model">
+            <span class="carbon-tag bio-tag-c">GL BIO</span>
+            <div class="carbon-model-text">매립 메탄 → CO₂ 전환<br><strong style="color:var(--earth2)">탄소 감축 실적</strong> 발행</div>
+          </div>
+          <div class="carbon-model">
+            <span class="carbon-tag magic-tag-c">GL MAGIC</span>
+            <div class="carbon-model-text">바이오차 → 토양 탄소 격리<br><strong style="color:var(--sun2)">탄소 격리 실적</strong> 발행</div>
+          </div>
+          <div class="carbon-model" style="margin-top: 8px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06);">
+            <span style="font-family: 'Courier New', Courier, monospace; font-size: 10px; color: rgba(255,255,255,0.3);">⛓️</span>
+            <div class="carbon-model-text"><strong style="color: rgba(255,255,255,0.8)">블록체인으로 투명하게 기록·발행·거래</strong><br><span style="color: rgba(255,255,255,0.35); font-size: 11px;">탄소 크레딧 + GL = 새로운 ESG 생태계</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ESGL 앰버서더 문구 -->
+      <div style="margin-top: 24px; padding: 32px 36px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; text-align: center;">
+        <div style="font-size: 20px; font-weight: 700; color: var(--sun2); line-height: 1.8; margin-bottom: 8px;">
+          환경과 탄소,<br>
+          블록체인의 조화로움<br>
+          GL 앰버서더분들과 함께<br>
+          누리겠습니다
+        </div>
+        <div style="font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.55); margin-top: 12px; line-height: 1.8;">
+          탄소문제를 해결하고 환경을 살리는 블록체인,<br>
+          GL이 먼저 시작합니다.
+        </div>
+        <div style="font-size: 28px; font-weight: 900; color: white; letter-spacing: 6px; margin-top: 16px;">
+          ESGL
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 브랜드 선언 -->
+  <section class="declaration">
+    <div class="container">
+      <div class="declaration-quote">
+        "태양의 에너지 <em>플라즈마</em>,<br>
+        <span>지구를 위한 순환 생태계</span>"
+      </div>
+      <div class="declaration-sub">GL이 새로운 에너지 순환 세계를 만들어갑니다</div>
+    </div>
+  </section>
+
+  <!-- 슬로건 -->
+  <section class="slogan-section">
+    <div class="container" style="position: relative; z-index: 1;">
+      <div class="slogan-kr" style="line-height: 1.9;">
+        태양의 에너지 <strong>플라즈마</strong>,<br>
+        <strong>지구</strong>를 위한 순환 생태계
+      </div>
+      <div class="slogan-en" style="margin-bottom: 24px;">
+        GL이 새로운 에너지 순환 세계를 만들어갑니다
+      </div>
+      <div class="slogan-divider"></div>
+      <div style="font-family: 'Courier New', Courier, monospace; font-size: 11px; color: rgba(255,255,255,0.25); letter-spacing: 4px;">
+        GL BIO · GL MAGIC · GL ECOFARM
+      </div>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">G<span>L</span></div>
+        <div class="footer-info">
+          Good Living · WIZCLASS INC.<br>
+          Brand Identity v1.0 · 2026.03 · CONFIDENTIAL
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
